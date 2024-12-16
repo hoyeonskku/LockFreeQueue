@@ -97,7 +97,7 @@ public:
             if (pHeadNext == NULL)
                 continue;
 
-            // head와 tail이 같은 경우 
+            // head와 tail이 같은 경우, head가 tail이 역전하지 않도록 방지해줘야 함.
             if (pHead == pTail)
             {
                 pTailNext = pTail->_next;
