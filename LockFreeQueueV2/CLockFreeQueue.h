@@ -34,19 +34,19 @@ public:
 
     void Enqueue(T t)
     {
-        Node* node = _pool.Alloc();
+        Node<T>* node = _pool.Alloc();
         node->_data = t;
         node->_next = NULL;
 
         unsigned long long nodeValue = MAKE_VALUE(_tailId, node);
         unsigned long long tailValue;
-        Node* pTail;
-        Node* pNext;
+        Node<T>* pTail;
+        Node<T>* pNext;
 
         while (true)
         {
             tailValue = _tailValue;
-            pTail = (Node*) MAKE_NODE(tailValue);
+            pTail = (Node<T>*) MAKE_NODE(tailValue);
             pNext = pTail->_next;
 
             // 2번 cas 실패한 경우를 위해 tail을 옮겨줄 수 있으면 옮겨줌.
@@ -78,20 +78,20 @@ public:
             DebugBreak();
             return -1;
         }
-        Node* pHead;
+        Node<T>* pHead;
         unsigned long long headValue;
-        Node* pTail;
+        Node<T>* pTail;
         unsigned long long tailValue;
-        Node* pHeadNext;
+        Node<T>* pHeadNext;
         unsigned long long headNextValue;
-        Node* pTailNext;
+        Node<T>* pTailNext;
         unsigned long long tailNextValue;
         while (true)
         {
             headValue = _headValue;
             tailValue = _tailValue;
-            pHead = (Node*) MAKE_NODE(headValue);
-            pTail = (Node*) MAKE_NODE(tailValue);
+            pHead = (Node<T>*) MAKE_NODE(headValue);
+            pTail = (Node<T>*) MAKE_NODE(tailValue);
             
             pHeadNext = pHead->_next;
             if (pHeadNext == NULL)
